@@ -1,0 +1,55 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Select
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <h2>Available Tools</h2>
+  <p>Select the tools fro your toolbox</p>
+  
+  <!-- Navigate back to selected tools -->
+  <ion-button (click)="goToTools()">Back to My Tools</ion-button>
+
+  <!-- For an ActionSheet -->
+  <ion-list>
+    <ion-item (click)="presentActionSheet(tool)" size="large" *ngFor="let tool of tools">
+      <ion-icon name={{tool.icon}}></ion-icon>
+      <ion-label>{{tool.name}}</ion-label>
+    </ion-item>  
+  </ion-list>
+
+  <!-- All tools available for an SlideList -->
+  <ion-list>
+    <ion-item-sliding *ngFor="let tool of tools">
+
+      <ion-item >
+        <ion-label>{{tool.name}}</ion-label>
+        <ion-icon name={{tool.icon}}></ion-icon>
+      </ion-item>
+
+      <!-- SlideList options-->
+      <ion-item-options side="end">
+        <ion-button (click)="toolSelect(tool)" color="success">
+          <ion-icon slot="start" name="bag-add-sharp"></ion-icon>
+          Select
+        </ion-button>
+
+        <!-- <ion-button (click)="toolDetails(tool)" color="warning" routerLink="/tabs/tab3/{{tool.id}}"> -->
+        <ion-button (click)="goToDetails(tool)" color="warning">
+          <ion-icon slot="start" name="eye-sharp"></ion-icon>
+          Details
+        </ion-button>
+
+        <ion-button (click)="toolSelect(tool)" color="danger">
+          <ion-icon slot="start" name="close-circle-sharp"></ion-icon>
+          Cancel
+        </ion-button>
+      </ion-item-options>
+
+    </ion-item-sliding>
+  </ion-list>
+
+</ion-content>

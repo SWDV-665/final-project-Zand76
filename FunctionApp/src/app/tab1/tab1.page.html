@@ -1,0 +1,26 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      {{title}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-title size="large">Select your tools</ion-title>
+
+  <h2>Your Tools</h2>
+  <p>Select the tool you would like to use</p>
+
+  <!-- Display all selected tools -->
+  <ion-button (click)="presentActionSheet(tool)" size="large" *ngFor="let tool of tools">{{tool.name}} 
+    <ion-icon name={{tool.icon}}></ion-icon>
+  </ion-button>
+
+  <ion-button (click)="getCamera()">Camera</ion-button>
+  <ion-button (click)="getFlashlight()">Flashlight</ion-button>
+
+    <!-- Navigate back to selected tools -->
+    <ion-button (click)="goToSelect()">Select More Tools</ion-button>
+</ion-content>
+

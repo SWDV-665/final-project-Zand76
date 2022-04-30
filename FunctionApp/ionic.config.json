@@ -1,0 +1,7 @@
+{
+  "name": "FunctionApp",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
