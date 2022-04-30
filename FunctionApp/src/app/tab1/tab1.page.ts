@@ -19,14 +19,7 @@ export class Tab1Page {
 
   title = 'Functions App';
   imgURL;
-  // const cameraOptions: CameraOptions = {
-  //   quality: 100,
-  //   destinationType: this.camera.DestinationType.FILE_URI,
-  //   encodingType: this.camera.EncodingType.JPEG,
-  //   mediaType: this.camera.MediaType.PICTURE
-  // }
 
-  // Selected tools
   tools = [];
 
   constructor(
