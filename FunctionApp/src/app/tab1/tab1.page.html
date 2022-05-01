@@ -10,6 +10,11 @@
   <h2>Your Toolbox</h2>
   <p>Which tool would you like to use?</p>
 
+  <!-- <div class="container">
+    <ion-button (click)="startLocate()">Geolocator</ion-button>
+    <p>Latitude: {{lat}}</p>
+    <p>Longitude: {{lon}}</p>
+  </div> -->
 
   <ion-list>
     <ion-item-sliding *ngFor="let tool of loadTools(); let i = index">
@@ -20,7 +25,7 @@
       <!-- SlideList options-->
       <ion-item-options side="end">
 
-        <ion-button (click)="getCamera()" color="success">
+        <ion-button (click)="startLocate()" color="success">
           <ion-icon slot="start" name="play-circle"></ion-icon>
           Start
         </ion-button>
@@ -33,6 +38,9 @@
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
+
+    <p>Latitude: {{lat}}</p>
+    <p>Longitude: {{lon}}</p>
 
   <!-- Display all selected tools -->
   <!-- <ion-button (click)="presentActionSheet(tool)" size="large" *ngFor="let tool of tools">{{tool.name}} 

@@ -5,6 +5,7 @@ import { ActionSheetController, NavController } from '@ionic/angular';
 import { Camera } from '@awesome-cordova-plugins/camera/ngx';
 import { Flashlight } from '@awesome-cordova-plugins/flashlight/ngx';
 import { ToolsServiceService } from '../tools-service.service';
+import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 
 
 
@@ -20,6 +21,8 @@ export class Tab1Page {
 
   title = 'Functions App';
   imgURL;
+  lat;
+  lon;
 
   constructor(
     public navCtrl: NavController,
@@ -27,7 +30,8 @@ export class Tab1Page {
     private router: Router,
     private camera: Camera,
     private flashlight: Flashlight,
-    public toolsService: ToolsServiceService
+    public toolsService: ToolsServiceService,
+    private geo: Geolocation
     ) {}
 
   // Navigate back to available tools
@@ -44,6 +48,19 @@ export class Tab1Page {
   removeTool(tool, index) {
     console.log("Removing Tool - ", tool, index);
     this.toolsService.removeTool(index);
+  }
+
+  startLocate() {
+    console.log("Starting Geolocation")
+    this.geo.getCurrentPosition({
+      timeout: 5000,
+      enableHighAccuracy: true
+    }).then((res)=>{
+      this.lat = res.coords.latitude;
+      this.lon = res.coords.longitude;
+    }).catch((err)=>{
+      console.log(err);
+    });
   }
 
   getFlashlight() {

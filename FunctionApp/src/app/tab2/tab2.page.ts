@@ -10,40 +10,37 @@ import { ToolsServiceService } from '../tools-service.service';
 })
 export class Tab2Page {
 
-  tools = [
+  tools = [];
 
-  ];
+
   constructor(
     public navCtrl: NavController,
     public actionSheetController: ActionSheetController,
     private router: Router,
-    public toolsService: ToolsServiceService
+    public toolsService: ToolsServiceService,
     ) {}
 
-// Navigate back to selected tools
-goToTools() {
-  console.log("Nav to TOOLS")
-  this.router.navigate(['tabs/tab1'], {
-  });
-}
-// Navigate to tool details
-goToDetails(tool) {
-  console.log("Nav to DETAILS")
-  this.router.navigate(['tabs/tab3'], {
-    queryParams: tool
-  });
-}
 
-loadTools() {
-  return this.toolsService.getItems();
-}
-
-addTool(tool) {
-  console.log("Adding tool")
-  return this.toolsService.addTool(tool);
+  // Navigate back to selected tools
+  goToTools() {
+    console.log("Nav to TOOLS")
+    this.router.navigate(['tabs/tab1'], {
+    });
   }
-// addTool(tool) {
-//   console.log("Adding tool")
-//   return this.toolsService.addItem(tool);
-//   }
+  // Navigate to tool details
+  goToDetails(tool) {
+    console.log("Nav to DETAILS")
+    this.router.navigate(['tabs/tab3'], {
+      queryParams: tool
+    });
+  }
+
+  loadTools() {
+    return this.toolsService.getItems();
+  }
+  addTool(tool) {
+    console.log("Adding tool")
+    return this.toolsService.addTool(tool);
+  }
+
 }
