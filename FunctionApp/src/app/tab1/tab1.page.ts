@@ -50,7 +50,7 @@ export class Tab1Page {
     this.toolsService.removeTool(index);
   }
 
-  startLocate() {
+  getGeoLocation() {
     console.log("Starting Geolocation")
     this.geo.getCurrentPosition({
       timeout: 5000,
