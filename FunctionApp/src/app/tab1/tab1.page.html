@@ -7,18 +7,40 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-title size="large">Select your tools</ion-title>
+  <h2>Your Toolbox</h2>
+  <p>Which tool would you like to use?</p>
 
-  <h2>Your Tools</h2>
-  <p>Select the tool you would like to use</p>
+
+  <ion-list>
+    <ion-item-sliding *ngFor="let tool of loadTools(); let i = index">
+      <ion-item >
+        <ion-label>{{tool.name}}</ion-label>
+        <ion-icon name={{tool.icon}}></ion-icon>
+      </ion-item>
+      <!-- SlideList options-->
+      <ion-item-options side="end">
+
+        <ion-button (click)="getCamera()" color="success">
+          <ion-icon slot="start" name="play-circle"></ion-icon>
+          Start
+        </ion-button>
+
+        <ion-button (click)="removeTool(tool)" color="danger">
+          <ion-icon slot="start" name="trash"></ion-icon>
+          Delete
+        </ion-button>
+
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 
   <!-- Display all selected tools -->
-  <ion-button (click)="presentActionSheet(tool)" size="large" *ngFor="let tool of tools">{{tool.name}} 
+  <!-- <ion-button (click)="presentActionSheet(tool)" size="large" *ngFor="let tool of tools">{{tool.name}} 
     <ion-icon name={{tool.icon}}></ion-icon>
-  </ion-button>
+  </ion-button> -->
 
-  <ion-button (click)="getCamera()">Camera</ion-button>
-  <ion-button (click)="getFlashlight()">Light</ion-button>
+  <!-- <ion-button (click)="getCamera()">Camera</ion-button>
+  <ion-button (click)="getFlashlight()">Light</ion-button> -->
 
     <!-- Navigate back to selected tools -->
     <ion-button (click)="goToSelect()">Select More Tools</ion-button>

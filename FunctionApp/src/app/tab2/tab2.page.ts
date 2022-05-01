@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ActionSheetController, NavController } from '@ionic/angular';
+import { ToolsServiceService } from '../tools-service.service';
 
 @Component({
   selector: 'app-tab2',
@@ -10,83 +11,39 @@ import { ActionSheetController, NavController } from '@ionic/angular';
 export class Tab2Page {
 
   tools = [
-    {
-      id: '01',
-      name: 'Camera',
-      icon: 'camera-sharp',
-      image: 'screenshot',
-      price: 123,
-      desc: 'Description of the tool and how it works.'    },
-    {
-      id: '02',
-      name: 'Light',
-      icon: 'flashlight-sharp',
-      image: 'screenshot',
-      price: 123,
-      desc: 'Description of the tool and how it works.'    },
-    {
-      id: '03',
-      name: 'Scanner',
-      icon: 'barcode-sharp',
-      image: 'screenshot',
-      price: 123,
-      desc: 'Description of the tool and how it works.'    },
-  ];
 
+  ];
   constructor(
     public navCtrl: NavController,
     public actionSheetController: ActionSheetController,
     private router: Router,
+    public toolsService: ToolsServiceService
     ) {}
 
 // Navigate back to selected tools
-// goToTools() {
-//   this.router.navigateByUrl('/tabs/tab1');
-// }
 goToTools() {
+  console.log("Nav to TOOLS")
   this.router.navigate(['tabs/tab1'], {
   });
 }
+// Navigate to tool details
 goToDetails(tool) {
+  console.log("Nav to DETAILS")
   this.router.navigate(['tabs/tab3'], {
     queryParams: tool
   });
 }
 
+loadTools() {
+  return this.toolsService.getItems();
+}
 
-// AsctionSheet options - Select tools
-async presentActionSheet(tool) {
-  const actionSheet = await this.actionSheetController.create({
-    header: tool.name,
-    cssClass: 'my-custom-class',
-    buttons: [
-    {
-      text: 'Add',
-      icon: 'bag-add-sharp',
-      data: 10,
-      handler: () => {
-        console.log('Add clicked');
-      }
-    },
-    {
-      text: 'Details',
-      icon: 'eye-sharp',
-      handler: () => {
-        console.log('Details clicked');
-      }
-    },
-    {
-      text: 'Cancel',
-      icon: 'close-circle-sharp',
-      role: 'cancel',
-      handler: () => {
-        console.log('Cancel clicked');
-      }
-    }]
-  });
-  await actionSheet.present();
-
-  const { role, data } = await actionSheet.onDidDismiss();
-  console.log('onDidDismiss resolved with role and data', role, data);
+addTool(tool) {
+  console.log("Adding tool")
+  return this.toolsService.addTool(tool);
   }
+// addTool(tool) {
+//   console.log("Adding tool")
+//   return this.toolsService.addItem(tool);
+//   }
 }

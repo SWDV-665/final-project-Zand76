@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { ActionSheetController, NavController } from '@ionic/angular';
-import { ToastController } from '@ionic/angular';
 import { Camera } from '@awesome-cordova-plugins/camera/ngx';
 import { Flashlight } from '@awesome-cordova-plugins/flashlight/ngx';
+import { ToolsServiceService } from '../tools-service.service';
+
 
 
 @Component({
@@ -20,28 +21,38 @@ export class Tab1Page {
   title = 'Functions App';
   imgURL;
 
-  tools = [];
-
   constructor(
     public navCtrl: NavController,
     public actionSheetController: ActionSheetController,
-    public toastCtrl: ToastController,
     private router: Router,
     private camera: Camera,
-    private flashlight: Flashlight
+    private flashlight: Flashlight,
+    public toolsService: ToolsServiceService
     ) {}
 
   // Navigate back to available tools
   goToSelect() {
+    console.log("Nav to SELECT")
     this.router.navigate(['tabs/tab2'], {
     });
   }
 
+  loadTools() {
+    return this.toolsService.getTools();
+  }
+
+  removeTool(tool, index) {
+    console.log("Removing Tool - ", tool, index);
+    this.toolsService.removeTool(index);
+  }
+
   getFlashlight() {
+    console.log("Starting Flashlight")
     this.flashlight.switchOn();
   }
 
   getCamera() {
+    console.log("Starting Camera")
     this.camera.getPicture({
       sourceType: this.camera.PictureSourceType.CAMERA,
       destinationType: this.camera.DestinationType.FILE_URI
@@ -52,57 +63,6 @@ export class Tab1Page {
       console.log(err);
      });
   }
-  // getGallery() {
-  //   this.camera.getPicture({
-  //     sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-  //     destinationType: this.camera.DestinationType.DATA_URL
-  //   }).then((res) => {
-  //     this.imgURL = 'data:image/jpeg;base64,' + res;
-  //    }, (err) => {
-  //     // Handle error
-  //     console.log(err);
-  //    });
-  // }
 
-  // ActionSheet options - Use selected tools
-  async presentActionSheet(tool) {
-    const actionSheet = await this.actionSheetController.create({
-      header: tool.name,
-      cssClass: 'my-custom-class',
-      buttons: [
-        {
-          text: 'Start',
-          icon: 'caret-forward-circle',
-          data: 'Data value',
-          handler: () => {
-            console.log('Start clicked');
-          }
-        },
-        {
-        text: 'Delete',
-        role: 'destructive',
-        icon: 'trash',
-        id: 'delete-button',
-        data: {
-          type: 'delete'
-        },
-        handler: () => {
-          console.log('Delete clicked');
-        }
-      },
-      {
-        text: 'Cancel',
-        icon: 'close-circle-sharp',
-        role: 'cancel',
-        handler: () => {
-          console.log('Cancel clicked');
-        }
-      }]
-    });
-    await actionSheet.present();
-
-    const { role, data } = await actionSheet.onDidDismiss();
-    console.log('onDidDismiss resolved with role and data', role, data);
-    }
-  }
+}
 

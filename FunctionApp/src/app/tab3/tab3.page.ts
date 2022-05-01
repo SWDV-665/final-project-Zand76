@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 
@@ -23,14 +23,10 @@ export class Tab3Page {
       this.tool = res;
     });
 
-  // ngOnInit() {
-  //   const category = this.route.snapshot.paramMap.get('id');
-  //   console.log(`category: ${category}`);
-  // }
-
   }
   // Navigate back to available tools
   goToSelect() {
+    console.log("Nav to SELECT")
     this.router.navigate(['tabs/tab2'], {
     });
   }
